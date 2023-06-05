@@ -1,0 +1,21 @@
+name: Daily commit
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Commit and push
+      run: |
+        git config --global user.name 'Greg'
+        git config --global user.email 'adamsg_53@yahoo.com'
+        date >> date.txt
+        git add date.txt
+        git commit -m "Daily commit"
+        git push
