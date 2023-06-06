@@ -13,7 +13,7 @@ jobs:
 
     - name: Commit and push
       run: |
-        git config --global user.name 'Greg'
+        git config --global user.name 'GreggRoll'
         git config --global user.email 'adamsg_53@yahoo.com'
         date >> date.txt
         git add date.txt
