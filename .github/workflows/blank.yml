@@ -22,7 +22,7 @@ jobs:
 
     - name: Setup PAT
       run: |
-        git remote set-url origin https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
+        git remote set-url origin https://GreggRoll:${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
 
     - name: Create and commit file
       run: |
