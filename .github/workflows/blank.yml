@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.MY_GITHUB_TOKEN }}
 
     - name: Commit and push
       run: |
@@ -21,4 +21,4 @@ jobs:
         date >> date.txt
         git add date.txt
         git commit -m "Daily commit"
-        git push https://${{secrets.GITHUB_TOKEN}}@github.com/GreggRoll/AutoCommit.git
+        git push https://${{secrets.MY_GITHUB_TOKEN}}@github.com/GreggRoll/AutoCommit.git
