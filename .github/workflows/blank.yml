@@ -10,10 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Setup git
+      run: |
+        git config --global user.name 'GreggRoll'
+        git config --global user.email 'adamsg_53@yahoo.com'
+
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
-        token: ${{ secrets.MY_GITHUB_TOKEN }}
+        persist-credentials: false
+
+    - name: Setup PAT
+      run: |
+        git remote add origin-https https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
+        git fetch origin-https
 
     - name: Create and commit file
       uses: actions/github-script@v4
