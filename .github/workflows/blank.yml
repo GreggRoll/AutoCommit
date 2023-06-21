@@ -21,4 +21,4 @@ jobs:
         date >> date.txt
         git add date.txt
         git commit -m "Daily commit"
-        git push
+        git push https://${{secrets.GITHUB_TOKEN}}@github.com/GreggRoll/AutoCommit.git
