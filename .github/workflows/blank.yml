@@ -10,16 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
       with:
-        persist-credentials: false # this prevents GitHub actions from using its token
-        token: ${{ secrets.MY_GITHUB_TOKEN }} # use your personal access token here
+        token: ${{ secrets.MY_GITHUB_TOKEN }}
 
-    - name: Commit and push
-      run: |
-        git config --global user.name 'GreggRoll'
-        git config --global user.email 'adamsg_53@yahoo.com'
-        date >> date.txt
-        git add date.txt
-        git commit -m "Daily commit"
-        git push https://${{secrets.MY_GITHUB_TOKEN}}@github.com/GreggRoll/AutoCommit.git
+    - name: Create and commit file
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const fs = require('fs');
+          fs.writeFileSync('date.txt', new Date().toISOString());
+          await github.rest.repos.createOrUpdateFileContents({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            path: 'date.txt',
+            message: 'Daily commit',
+            content: Buffer.from(fs.readFileSync('date.txt')).toString('base64'),
+            branch: 'main',
+          });
