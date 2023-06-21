@@ -22,20 +22,11 @@ jobs:
 
     - name: Setup PAT
       run: |
-        git remote add origin-https https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
-        git fetch origin-https
+        git remote set-url origin https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
 
     - name: Create and commit file
-      uses: actions/github-script@v4
-      with:
-        script: |
-          const fs = require('fs');
-          fs.writeFileSync('date.txt', new Date().toISOString());
-          await github.rest.repos.createOrUpdateFileContents({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            path: 'date.txt',
-            message: 'Daily commit',
-            content: Buffer.from(fs.readFileSync('date.txt')).toString('base64'),
-            branch: 'main',
-          });
+      run: |
+        date >> date.txt
+        git add date.txt
+        git commit -m "Daily commit"
+        git push
