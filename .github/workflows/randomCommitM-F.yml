@@ -1,9 +1,8 @@
 name: Daily commit
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 1 * * 1-5'  # Runs at 01:00 from Monday to Friday
 
 jobs:
   build:
@@ -24,9 +23,14 @@ jobs:
       run: |
         git remote set-url origin https://GreggRoll:${{ secrets.MY_GITHUB_TOKEN }}@github.com/GreggRoll/AutoCommit.git
 
-    - name: Create and commit file
+    - name: Create and commit files
       run: |
-        date >> date.txt
-        git add date.txt
-        git commit -m "Daily commit"
+        RANDOM_COMMIT_COUNT=$(( RANDOM % 10 + 1 ))
+        echo "Making $RANDOM_COMMIT_COUNT commits"
+        for i in $(seq 1 $RANDOM_COMMIT_COUNT)
+        do
+          echo "$(date) - $i" >> date.txt
+          git add date.txt
+          git commit -m "Daily commit #$i"
+        done
         git push
