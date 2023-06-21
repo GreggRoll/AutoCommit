@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        token: ${{ secrets.MY_GITHUB_TOKEN }}
+        persist-credentials: false # this prevents GitHub actions from using its token
+        token: ${{ secrets.MY_GITHUB_TOKEN }} # use your personal access token here
 
     - name: Commit and push
       run: |
