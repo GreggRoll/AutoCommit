@@ -1,4 +1,4 @@
-# AutoCommitt \
+# AutoCommitt /
 A way to keep that github timeline green. Tested for a month until my secret key expired and testing was completed. 
 
 Runs using a github workflows .yml script.
