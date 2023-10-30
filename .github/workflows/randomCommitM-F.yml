@@ -34,4 +34,5 @@ jobs:
           git add date.txt
           git commit -m "Daily commit #$i"
         done
-        git push
+        #stopping the commits
+        #git push
