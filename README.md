@@ -3,17 +3,17 @@ A way to keep that github timeline green. Tested for a month until my secret key
 
 Runs using a github workflows .yml script.
 
-name: Daily commit
+    name: Daily commit
 
-on:
-  workflow_dispatch:
-  schedule:
-    #Here you can change frequency and dates
-    - cron: '0 1 * * 1-5'  # Runs at 01:00 from Monday to Friday
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
+    on:
+      workflow_dispatch:
+      schedule:
+        #Here you can change frequency and dates
+        - cron: '0 1 * * 1-5'  # Runs at 01:00 from Monday to Friday
+    
+    jobs:
+      build:
+        runs-on: ubuntu-latest
 
     steps:
     - name: Setup git
